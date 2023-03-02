@@ -1,5 +1,5 @@
 {
-  "name": "CreactiveApp_BackEnd-server",
+  "name": "creactive-app_backend-server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -17,6 +17,7 @@
     "jwt-decode": "^3.1.2",
     "jwt-rbac": "^1.0.8",
     "mongoose": "^7.0.0",
+    "mongoose-role": "^3.0.5",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
