@@ -10,10 +10,10 @@ const photoshootApprovalSchema = new Schema([
             type: String,
             required: true //this value should be the file name by default or input value by creator
         },
-        image: {
-            type: String,
+        image: [{
+            type: Buffer,
             required: true 
-        },
+        }],
         copies: {
             type: Number,
             required: false
@@ -21,6 +21,10 @@ const photoshootApprovalSchema = new Schema([
         print: {
             enum: [print],
             required: false
+        },
+        project: {
+                type: Schema.Types.ObjectId,
+                ref: 'PhotoshooPfoject',
         },
   }
 ])

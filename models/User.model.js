@@ -5,7 +5,7 @@ const userSchema = new Schema(
   {
     avatar: {
       type: String,
-      required: true
+      required: false
     },
     username: {
       type: String,
@@ -17,12 +17,12 @@ const userSchema = new Schema(
       type: String,
       trim: true,
       required: true,
-      unique: true
+      unique: false
     },
     lastname: {
       type: String,
       trim: true,
-      required: true
+      required: false
     },
     email: {
       type: String,
@@ -86,7 +86,7 @@ const userSchema = new Schema(
 //Need to review the access levels --- can they (like bellow) change or must be public, anon, user and admin?
 
 UserSchema.plugin(require('mongoose-role'), {
-  roles: ['superAdmin', 'admin', 'client', 'photographer', 'illustrator', 'graphic-designer', 'frontend-developer', 'backend-developer', 'ux-ui-designer'],
+  role: ['superAdmin', 'admin', 'client', 'photographer', 'illustrator', 'graphic-designer', 'frontend-developer', 'backend-developer', 'ux-ui-designer'],
   accessLevels: {
     guest: [''],
     public: ['superAdmin', 'admin', 'client', 'photographer', 'illustrator', 'graphic-designer', 'frontend-developer', 'backend-developer', 'ux-ui-designer'],

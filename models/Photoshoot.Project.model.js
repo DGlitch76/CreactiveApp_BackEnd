@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const print = ['20x30', '40x50', '70x100']
+
 
 //Model for Photoshoot Project Approval
 //Photoshoots have nultiple photo objects
@@ -14,14 +14,14 @@ const photoshootProjectSchema = new Schema([
             type: String,
             required: true 
         },
-        print: {
-            enum: [print],
-            required: false
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
         },
   }
 ])
 
 
-  const PhotoshootProject = model("PhotoshootApproval", photoshootProjectSchema);
+  const PhotoshootProject = model("PhotoshooPfoject", photoshootProjectSchema);
   
   module.exports = PhotoshootProject;

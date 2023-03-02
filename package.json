@@ -18,7 +18,8 @@
     "jwt-rbac": "^1.0.8",
     "mongoose": "^7.0.0",
     "mongoose-role": "^3.0.5",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "react-uploader": "^3.8.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
