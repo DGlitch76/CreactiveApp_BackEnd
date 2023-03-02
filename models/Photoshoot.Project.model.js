@@ -22,6 +22,6 @@ const photoshootProjectSchema = new Schema([
 ])
 
 
-  const PhotoshootProject = model("PhotoshooPfoject", photoshootProjectSchema);
+  const PhotoshootProject = model("PhotoshootProject", photoshootProjectSchema);
   
   module.exports = PhotoshootProject;
