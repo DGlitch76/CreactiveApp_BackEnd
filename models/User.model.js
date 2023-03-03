@@ -24,30 +24,36 @@ const userSchema = new Schema(
       trim: true,
       required: false
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true
-    },
-    passwordHash: {
-      type: String,
+    role: {
+      type: Array,
+      trim: true,
       required: true
+    },
+    dob: {
+      type: Date,
+      required: true,
     },
     company: {
       type: String,
       trim: true,
       required: false
     },
-    dateofbirth: {
-      type: Date,
-      required: true,
-    },
-    phonenumber: {
+    phone: {
       type: Number,
       required: false
     },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: false,
+      trim: true
+    },
+    passwordHash: {
+      type: String,
+      required: true
+    },
+
 
     address: [
       {
@@ -69,7 +75,7 @@ const userSchema = new Schema(
         },
         country: {
           type: Number,
-          required: true
+          required: false
         },
       }
     ]
@@ -80,21 +86,6 @@ const userSchema = new Schema(
     timestamps: true
   }
 );
-
-
-//This sets up the model for role access control // Check https://www.npmjs.com/package/mongoose-role
-//Need to review the access levels --- can they (like bellow) change or must be public, anon, user and admin?
-
-UserSchema.plugin(require('mongoose-role'), {
-  role: ['superAdmin', 'admin', 'client', 'photographer', 'illustrator', 'graphic-designer', 'frontend-developer', 'backend-developer', 'ux-ui-designer'],
-  accessLevels: {
-    guest: [''],
-    public: ['superAdmin', 'admin', 'client', 'photographer', 'illustrator', 'graphic-designer', 'frontend-developer', 'backend-developer', 'ux-ui-designer'],
-    creator: ['photographer', 'illustrator', 'graphic-designer', 'frontend-developer', 'backend-developer', 'ux-ui-designer'],
-    client: ['client'],
-    admin: ['superAdmin', 'admin']
-  }
-})
 
 
 const User = model("User", userSchema);
