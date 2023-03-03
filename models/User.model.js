@@ -5,51 +5,55 @@ const userSchema = new Schema(
   {
     avatar: {
       type: String,
-      required: true
+      required: false
     },
     username: {
       type: String,
       trim: true,
-      required: true,
+      //required: true,
       unique: true
     },
     firstname: {
       type: String,
       trim: true,
-      required: true,
-      unique: true
+      //required: true,
+      unique: false
     },
     lastname: {
       type: String,
       trim: true,
-      required: true
+      required: false
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true
+    role: {
+      type: Array,
+      trim: true,
+      //required: true
     },
-    passwordHash: {
-      type: String,
-      required: true
+    dob: {
+      type: Date,
+      required: false,
     },
     company: {
       type: String,
       trim: true,
       required: false
     },
-    dateofbirth: {
-      type: Date,
-      required: true,
-    },
-    phonenumber: {
+    phone: {
       type: Number,
       required: false
     },
-
-    address: [
+    email: {
+      type: String,
+      //required: true,
+      unique: true,
+      lowercase: false,
+      trim: true
+    },
+    passwordHash: {
+      type: String,
+      //required: true
+    },
+    address: 
       {
         street: {
           type: String,
@@ -69,32 +73,16 @@ const userSchema = new Schema(
         },
         country: {
           type: Number,
-          required: true
+          required: false
         },
-      }
-    ]
-
+      }  
   },
+
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
     timestamps: true
   }
 );
-
-
-//This sets up the model for role access control // Check https://www.npmjs.com/package/mongoose-role
-//Need to review the access levels --- can they (like bellow) change or must be public, anon, user and admin?
-
-UserSchema.plugin(require('mongoose-role'), {
-  roles: ['superAdmin', 'admin', 'client', 'photographer', 'illustrator', 'graphic-designer', 'frontend-developer', 'backend-developer', 'ux-ui-designer'],
-  accessLevels: {
-    guest: [''],
-    public: ['superAdmin', 'admin', 'client', 'photographer', 'illustrator', 'graphic-designer', 'frontend-developer', 'backend-developer', 'ux-ui-designer'],
-    creator: ['photographer', 'illustrator', 'graphic-designer', 'frontend-developer', 'backend-developer', 'ux-ui-designer'],
-    client: ['client'],
-    admin: ['superAdmin', 'admin']
-  }
-})
 
 
 const User = model("User", userSchema);

@@ -7,11 +7,11 @@ const illustrationApprovalSchema = new Schema([
     {
         name: {
             type: String,
-            required: true //this value should be the file name by default or input value by creator
+            //required: true //this value should be the file name by default or input value by creator
         },
         image: {
             type: String,
-            required: true
+            //required: true
         },
         copies: {
             type: Number,
@@ -24,8 +24,6 @@ const illustrationApprovalSchema = new Schema([
   }
 ])
 
-
-  const IllustrationApproval = model("IllustrationApproval", illustrationApprovalSchema);
+const IllustrationApproval = model("IllustrationApproval", illustrationApprovalSchema);
   
-  module.exports = IllustrationApproval;
-
+module.exports = IllustrationApproval;

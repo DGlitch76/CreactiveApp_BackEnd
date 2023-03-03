@@ -16,6 +16,7 @@
     "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
     "jwt-rbac": "^1.0.8",
+    "mongodb": "^5.1.0",
     "mongoose": "^7.0.0",
     "mongoose-role": "^3.0.5",
     "morgan": "^1.10.0"

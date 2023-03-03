@@ -1,29 +1,26 @@
 const router = require("express").Router();
+const PhotoshootProject = require("../models/Photoshoot.Project.model");
+const User = require("../models/User.model");
 
 router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
-
-module.exports = router;
 
 //authentication routes
 router.get("/auth", (req, res, next) => {
   res.json("Authentication Index Route");
 });
 
-module.exports = router;
-
-
-//profile route for user/clients
-router.get("/u/home", (req, res, next) => {
-  res.json("user (client type) index Route");
+//PHOTOSHOOTS routes
+router.get("/projects", async (req, res, next) => {
+  const allProjects = await PhotoshootProject.find()
+  res.json(allProjects);
 });
 
-module.exports = router;
-
-//profile route for user/creative
-router.get("/c/home", (req, res, next) => {
-  res.json("user (creative) index Route");
+//USERS routes
+router.get("/users", async (req, res, next) => {
+  const allUsers = await User.find()
+  res.json(allUsers)
 });
 
 module.exports = router;
