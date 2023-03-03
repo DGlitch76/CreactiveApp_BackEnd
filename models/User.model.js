@@ -31,7 +31,7 @@ const userSchema = new Schema(
     },
     dob: {
       type: Date,
-      required: true,
+      required: false,
     },
     company: {
       type: String,
@@ -53,9 +53,7 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-
-
-    address: [
+    address: 
       {
         street: {
           type: String,
@@ -77,10 +75,9 @@ const userSchema = new Schema(
           type: Number,
           required: false
         },
-      }
-    ]
-
+      }  
   },
+
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
     timestamps: true
