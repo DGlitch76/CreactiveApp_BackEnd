@@ -18,7 +18,7 @@ router.post("/signup", async(req, res) => {
     //Create User
 await User.create({username: req.body.username, passwordHash:hashedPassword})
 
-    res.status(201).send({message:'User created successfully'})
+    res.status(201).json({message:'User created successfully'})
   });
 //Login
 router.post('/login', async(req,res) => {
@@ -41,7 +41,7 @@ router.post('/login', async(req,res) => {
             res.status(403).json({message:'Incorrect password'})
         }
     }else{
-        res.status(404).json({message:'The user was not found'})
+        res.status(404).json({message:'User not found'})
     }
 })
 
