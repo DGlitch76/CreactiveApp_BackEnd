@@ -24,7 +24,7 @@ const photoshootApprovalSchema = new Schema([
         },
         project: {
                 type: Schema.Types.ObjectId,
-                ref: 'PhotoshootPfoject',
+                ref: 'PhotoshootProject',
         },
   }
 ])
