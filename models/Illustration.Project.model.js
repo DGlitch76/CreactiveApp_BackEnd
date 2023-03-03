@@ -4,7 +4,7 @@ const { Schema, model } = require("mongoose");
 
 //Model for Photoshoot Project Approval
 //Photoshoots have nultiple photo objects
-const photoshootProjectSchema = new Schema(
+const illustrationProjectSchema = new Schema(
     {
         name: {
             type: String,
@@ -46,6 +46,7 @@ const photoshootProjectSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Comment'
           }]
+
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
@@ -54,6 +55,6 @@ const photoshootProjectSchema = new Schema(
 )
 
 
-  const PhotoshootProject = model("PhotoshootProject", photoshootProjectSchema);
+  const IllustrationProject = model("illustrationProject", illustrationProjectSchema);
   
-  module.exports = PhotoshootProject;
+  module.exports = IllustrationProject;
