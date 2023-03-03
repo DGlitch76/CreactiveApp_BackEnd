@@ -1,5 +1,6 @@
 const PhotoshootProject = require("../models/Photoshoot.Project.model");
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 
 router.get("/", (req, res, next) => {
   res.json("All good in here");

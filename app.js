@@ -19,10 +19,13 @@ const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
 
 const projectRoutes = require("./routes/project.routes");
-app.use("/api", projectRoutes);
+app.use("/photoshootProjects", projectRoutes);
 
-const approvalRoutes = require("./routes/index.routes");
-app.use("/api", approvalRoutes);
+const approvalIllustrationRoutes = require("./routes/approval.routes");
+app.use("/illustrationApprovals", approvalIllustrationRoutes);
+
+const approvalPhotoshootRoutes = require("./routes/approval.routes");
+app.use("/photoshootApprovals", approvalPhotoshootRoutes);
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes

@@ -1,6 +1,16 @@
 const IllustrationApproval = require("../models/Illustration.Approval.model");
 const PhotoshootApproval = require("../models/Photoshoot.Approval.model");
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
+
+router.get("/", (req, res, next) => {
+  res.json("All good in here");
+});
+
+// Authentication routes
+router.get("/auth", (req, res, next) => {
+  res.json("Authentication Index Route");
+});
 
 // Get all illustration approvals
 router.get('/illustrationApprovals', async (req, res) => {
