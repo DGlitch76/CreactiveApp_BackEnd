@@ -10,13 +10,13 @@ const userSchema = new Schema(
     username: {
       type: String,
       trim: true,
-      //required: true,
+      required: true,
       unique: true
     },
     firstname: {
       type: String,
       trim: true,
-      //required: true,
+      required: true,
       unique: false
     },
     lastname: {
@@ -27,7 +27,7 @@ const userSchema = new Schema(
     role: {
       type: Array,
       trim: true,
-      //required: true
+      required: true
     },
     dob: {
       type: Date,
@@ -44,14 +44,14 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      //required: true,
+      required: true,
       unique: true,
       lowercase: false,
       trim: true
     },
     passwordHash: {
       type: String,
-      //required: true
+      required: true
     },
     address: 
       {

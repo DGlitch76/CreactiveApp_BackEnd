@@ -8,11 +8,11 @@ const photoshootApprovalSchema = new Schema([
     {
         name: {
             type: String,
-            //required: true //this value should be the file name by default or input value by creator
+            required: true //this value should be the file name by default or input value by creator
         },
         image: [{
             type: Buffer,
-            //required: true 
+            required: true 
         }],
         copies: {
             type: Number,
