@@ -13,62 +13,79 @@ router.get("/api", (req, res, next) => {
 
 // Get all projects
 router.get('/photoshootProjects', async (req, res) => {
-    try {
-      const allPhotoshootProjects = await PhotoshootProject.find()
-      console.log('All photoshoot projects :', allPhotoshootProjects)
-      res.render('All photoshoot projects', { projects: allPhotoshootProjects })
-    } catch (error) {
-      console.log('Route to all photoshoot projects', error)
-    }
+  try {
+    const projects = await PhotoshootProject.find();
+    res.render('projects', { projects });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
 });
-  
-  // Create a new project
-  router.get('/photoshootProjects/new', async (req, res, next) => {
-    res.render('New photoshoot projects', { update: false })
-  });
 
-  router.post('/photoshootProjects/new', async (req, res) => {
-    //const body = req.body
-    //console.log(body)
-  
-    const User = req.session.userId;
-  
-    await PhotoshootProject.create({
-      //...body,
-      //description: body.description,
-      user: User,
-    })
-  
-    res.redirect('/photoshootProjects')
-  })
-    
-  // Get a specific project by ID
-  router.get('/:photoshootProjectId', async (req, res) => {
-    const photoshootProjectFound = await PhotoshootProject.findById(req.params.photoshootProjectId).populate('User')
-    console.log({ photoshootProjectFound })
-    res.render('Specific photoshoot project', { photoshootProjectFound })
-  })
-  
-  // Update a specific property by ID
-  router.get('/:photoshootProjectId/edit', async (req, res) => {
-    const photoshootProject = await PhotoshootProject.findById(req.params.photoshootProjectId)
-    res.render('Update specific project', { photoshootProject, update: true })
-  })
-  
-  router.post('/:photoshootProjectId', async (req, res) => {
-    await PhotoshootProject.findByIdAndUpdate(req.params.photoshootProjectId, {
-      //...req.body,
-      //description: req.body.description,
-    })
-  
-    res.redirect(`/photoshootProjects/${req.params.photoshootProjectId}`)
-  })
-    
-  // Delete a specific property by ID
-  router.get('/:photoshootProjectId/delete', async (req, res) => {
-    await PhotoshootProject.findByIdAndDelete(req.params.photoshootProjectId)
-  
-    res.redirect('/photoshootProjects')
-  })
+// Create a new project
+router.post('/photoshootProjects', async (req, res) => {
+  try {
+    const { name, image, description } = req.body;
+    const newProject = await PhotoshootProject.create({
+      name,
+      image,
+      description,
+    });
+    res.redirect('/photoshootProjects');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+// Get a specific project by ID
+router.get('/photoshootProjects/:photoshootProjectId', async (req, res) => {
+  try {
+    const project = await PhotoshootProject.findById(req.params.photoshootProjectId).populate('User');
+    if (!project) {
+      res.status(404).send('Project not found');
+    } else {
+      res.render('projectDetail', { project });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+// Update a specific project by ID
+router.post('/photoshootProjects/:photoshootProjectId/update', async (req, res) => {
+  try {
+    const { name, image, description } = req.body;
+    const updatedProject = await PhotoshootProject.findByIdAndUpdate(
+      req.params.photoshootProjectId,
+      { name, image, description },
+      { new: true }
+    );
+    if (!updatedProject) {
+      res.status(404).send('Project not found');
+    } else {
+      res.redirect(`/photoshootProjects/${req.params.photoshootProjectId}`);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+// Delete a specific project by ID
+router.post('/photoshootProjects/:photoshootProjectId/delete', async (req, res) => {
+  try {
+    const deletedProject = await PhotoshootProject.findByIdAndDelete(req.params.photoshootProjectId);
+    if (!deletedProject) {
+      res.status(404).send('Project not found');
+    } else {
+      res.redirect('/photoshootProjects');
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 
 module.exports = router;

@@ -15,11 +15,11 @@ const illustrationApprovalSchema = new Schema([
         },
         copies: {
             type: Number,
-            required: false
+            //required: false
         },
         print: {
-            enum: [print],
-            required: false
+            enum: print,
+            //required: false
         },
   }
 ])

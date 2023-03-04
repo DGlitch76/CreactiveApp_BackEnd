@@ -21,15 +21,12 @@ const photoshootProjectSchema = new Schema(
             ref: 'User',
         },
         type: {
+            type: String,
             enum: ['Public', 'Private'], // radio buttons / select boxes
             required: true,
         },
 
   },
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
-    timestamps: true
-  }
 )
 
 

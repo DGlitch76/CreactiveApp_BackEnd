@@ -16,11 +16,11 @@ const photoshootApprovalSchema = new Schema([
         }],
         copies: {
             type: Number,
-            required: false
+            //required: false
         },
         print: {
             enum: [print],
-            required: false
+            //required: false
         },
         project: {
                 type: Schema.Types.ObjectId,
