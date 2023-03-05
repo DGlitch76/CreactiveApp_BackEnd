@@ -18,14 +18,12 @@ const photoshootApprovalSchema = new Schema(
             isApproved: Boolean,
             copies:{
                 type: Number,
-                required: false
             },
             print: {
+                type: String,
                 enum: [print],
-                required: false
             }
             } ],
-
         project: {
                 type: Schema.Types.ObjectId,
                 ref: 'PhotoshootPfoject',

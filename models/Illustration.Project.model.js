@@ -1,7 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-
-
 //Model for Photoshoot Project Approval
 //Photoshoots have nultiple photo objects
 const illustrationProjectSchema = new Schema(
@@ -16,19 +14,15 @@ const illustrationProjectSchema = new Schema(
             localFolder:String,
             isAwaitingApproval: Boolean,
             isApproved: Boolean,
-            required:true,
-            } ],
+            required:true}],
         description: {
             type: String, 
-            required: false
         },
         hashtags: {
             type: String, 
-            required: false
         },
         hashtags: {
             type: String, 
-            required: false
         },
         client:{
             type: Schema.Types.ObjectId, //form option to be used by the creator (project don't need a client or it can be set by the project creator)
@@ -39,6 +33,7 @@ const illustrationProjectSchema = new Schema(
             ref: 'User',
         },
         type: {
+            type: String,
             enum: ['Public', 'Private'], // radio buttons / select boxes
             required: true,
         },
@@ -46,7 +41,6 @@ const illustrationProjectSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Comment'
           }]
-
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
