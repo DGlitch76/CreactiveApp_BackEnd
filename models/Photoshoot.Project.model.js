@@ -16,19 +16,15 @@ const photoshootProjectSchema = new Schema(
             localFolder:String,
             isAwaitingApproval: Boolean,
             isApproved: Boolean,
-            required:true,
             } ],
         description: {
             type: String, 
-            required: false
         },
         hashtags: {
             type: String, 
-            required: false
         },
         hashtags: {
             type: String, 
-            required: false
         },
         client:{
             type: Schema.Types.ObjectId, //form option to be used by the creator (project don't need a client or it can be set by the project creator)
@@ -39,6 +35,7 @@ const photoshootProjectSchema = new Schema(
             ref: 'User',
         },
         type: {
+            type: String,
             enum: ['Public', 'Private'], // radio buttons / select boxes
             required: true,
         },

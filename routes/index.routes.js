@@ -21,6 +21,7 @@ router.get("/projects", async (req, res, next) => {
 router.get("/users", async (req, res, next) => {
   const allUsers = await User.find()
   res.json(allUsers)
+});
 //USERS routes
 router.get("/users", async (req, res, next) => {
   const allUsers = await User.find()

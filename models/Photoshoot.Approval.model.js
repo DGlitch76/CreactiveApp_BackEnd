@@ -18,11 +18,9 @@ const photoshootApprovalSchema = new Schema(
             isApproved: Boolean,
             copies:{
                 type: Number,
-                required: false
             },
             print: {
                 enum: [print],
-                required: false
             }
             } ],
 
