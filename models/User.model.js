@@ -72,14 +72,19 @@ const userSchema = new Schema(
           required: false
         },
         country: {
-          type: String,
+          type: Number,
           required: false
         },
       }  
   },
+
+  {
+    // this second object adds extra properties: `createdAt` and `updatedAt`    
+    timestamps: true
+  }
 );
 
 
-const User = model("User", userSchema)
+const User = model("User", userSchema);
 
-module.exports = User
+module.exports = User;
