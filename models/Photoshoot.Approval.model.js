@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const print = ['20x30', '40x50', '70x100']
+
 
 //Model for Photoshoot Project Approval
 //Photoshoots have nultiple photo objects
@@ -21,7 +21,7 @@ const photoshootApprovalSchema = new Schema(
             },
             print: {
                 type: String,
-                enum: [print],
+                enum: ['20x30', '40x50', '70x100'],
             }
             } ],
         project: {

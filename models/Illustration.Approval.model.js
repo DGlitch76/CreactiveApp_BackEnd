@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const print = ['20x30', '40x50', '70x100']
+
 
 //Model for Illustration Project Approval
 const illustrationApprovalSchema = new Schema(
@@ -20,7 +20,7 @@ const illustrationApprovalSchema = new Schema(
             },
             print: {
                 type:String,
-                enum: [print],
+                enum: ['20x30', '40x50', '70x100'],
             }
             } ],
         project: {
