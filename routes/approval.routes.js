@@ -32,12 +32,12 @@ router.post('/illustrationApprovals/new', async (req, res) => {
   //const body = req.body
   //console.log(body)
 
-  const User = req.session.userId;
+  const user = req.session.userId;
 
   await IllustrationApproval.create({
     //...body,
     //description: body.description,
-    user: User,
+    user: user,
   })
 
   res.redirect('/illustrationApprovals')
@@ -63,12 +63,12 @@ router.post('/photoshootApprovals/new', async (req, res) => {
   //const body = req.body
   //console.log(body)
 
-  const User = req.session.userId;
+  const user = req.session.userId;
 
   await PhotoshootApproval.create({
     //...body,
     //description: body.description,
-    user: User,
+    user: user,
   })
 
   res.redirect('/photoshootApprovals')
