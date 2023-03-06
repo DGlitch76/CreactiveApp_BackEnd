@@ -32,7 +32,6 @@ const illustrationApprovalSchema = new Schema(
 
 
 
-  const IllustrationApproval = model("IllustrationApproval", illustrationApprovalSchema);
+const IllustrationApproval = model("IllustrationApproval", illustrationApprovalSchema);
   
-  module.exports = IllustrationApproval;
-
+module.exports = IllustrationApproval;

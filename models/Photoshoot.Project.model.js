@@ -14,7 +14,7 @@ const photoshootProjectSchema = new Schema(
             localFolder:String,
             isAwaitingApproval: Boolean,
             isApproved: Boolean,
-            required:true} ],
+            } ],
         description: {
             type: String, 
         },
