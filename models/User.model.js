@@ -69,7 +69,7 @@ const userSchema = new Schema(
           required: false
         },
         country: {
-          type: Number,
+          type: String,
           required: false
         },
       }  
