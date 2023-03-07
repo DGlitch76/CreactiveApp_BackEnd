@@ -12,10 +12,10 @@ router.get("/api", (req, res, next) => {
 });
 
 // Get all projects
-router.get('/photoshootProjects', async (req, res) => {
+router.get('/api/projects', async (req, res) => {
   try {
-    const projects = await PhotoshootProject.find();
-    res.render('projects', { projects });
+    const projects = await Project.find();
+    res.render('/api/projects', { projects });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');
@@ -23,7 +23,7 @@ router.get('/photoshootProjects', async (req, res) => {
 });
 
 // Create a new project
-router.post('/photoshootProjects', async (req, res) => {
+router.post('/api/project/new', async (req, res) => {
   try {
     const { name, image, description } = req.body;
     const newProject = await PhotoshootProject.create({
@@ -31,7 +31,7 @@ router.post('/photoshootProjects', async (req, res) => {
       image,
       description,
     });
-    res.redirect('/photoshootProjects');
+    res.status(201).json(newProject);
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');
@@ -39,13 +39,13 @@ router.post('/photoshootProjects', async (req, res) => {
 });
 
 // Get a specific project by ID
-router.get('/photoshootProjects/:photoshootProjectId', async (req, res) => {
+router.get('/api/projects/:projectId', async (req, res) => {
   try {
     const project = await PhotoshootProject.findById(req.params.photoshootProjectId).populate('User');
     if (!project) {
       res.status(404).send('Project not found');
     } else {
-      res.render('projectDetail', { project });
+      res.render(`/api/projects/${req.params.ProjectId}`);
     }
   } catch (err) {
     console.error(err);
@@ -54,7 +54,7 @@ router.get('/photoshootProjects/:photoshootProjectId', async (req, res) => {
 });
 
 // Update a specific project by ID
-router.post('/photoshootProjects/:photoshootProjectId/update', async (req, res) => {
+router.post('/api/projects/:projectId/update', async (req, res) => {
   try {
     const { name, image, description } = req.body;
     const updatedProject = await PhotoshootProject.findByIdAndUpdate(
@@ -65,7 +65,7 @@ router.post('/photoshootProjects/:photoshootProjectId/update', async (req, res) 
     if (!updatedProject) {
       res.status(404).send('Project not found');
     } else {
-      res.redirect(`/photoshootProjects/${req.params.photoshootProjectId}`);
+      res.redirect(`/api/projects/${req.params.ProjectId}`);
     }
   } catch (err) {
     console.error(err);
@@ -74,13 +74,13 @@ router.post('/photoshootProjects/:photoshootProjectId/update', async (req, res) 
 });
 
 // Delete a specific project by ID
-router.post('/photoshootProjects/:photoshootProjectId/delete', async (req, res) => {
+router.post('/api/projects/:projectId/delete', async (req, res) => {
   try {
     const deletedProject = await PhotoshootProject.findByIdAndDelete(req.params.photoshootProjectId);
     if (!deletedProject) {
       res.status(404).send('Project not found');
     } else {
-      res.redirect('/photoshootProjects');
+      res.redirect('/api/projects');
     }
   } catch (err) {
     console.error(err);

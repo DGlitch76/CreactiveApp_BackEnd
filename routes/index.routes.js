@@ -6,19 +6,14 @@ router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
 
-//authentication routes
-router.get("/auth", (req, res, next) => {
-  res.json("Authentication Index Route");
-});
-
-//PHOTOSHOOTS routes
-router.get("/projects", async (req, res, next) => {
-  const allProjects = await PhotoshootProject.find()
+//PROJECTS routes
+router.get("/api/projects", async (req, res, next) => {
+  const allProjects = await Project.find()
   res.json(allProjects);
 });
 
 //USERS routes
-router.get("/users", async (req, res, next) => {
+router.get("/api/users", async (req, res, next) => {
   const allUsers = await User.find()
   res.json(allUsers)
 });
