@@ -1,10 +1,7 @@
 const { Schema, model } = require("mongoose");
 
-
-
-//Model for Photoshoot Project Approval
 //Photoshoots have nultiple photo objects
-const photoshootProjectSchema = new Schema(
+const ProjectSchema = new Schema(
     {
         name: {
             type: String,
@@ -51,6 +48,6 @@ const photoshootProjectSchema = new Schema(
 )
 
 
-  const PhotoshootProject = model("PhotoshootProject", photoshootProjectSchema);
+  const Project = model("Project", ProjectSchema);
   
-module.exports = PhotoshootProject;
+module.exports = Project;

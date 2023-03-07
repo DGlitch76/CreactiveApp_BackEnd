@@ -13,7 +13,7 @@ const commentSchema = new Schema({
     // each comment can only relate to one project
     project: {
         type: Schema.Types.ObjectId,
-        ref: 'PhotoshootProject',
+        ref: 'Project',
     },
 },
 {

@@ -24,19 +24,11 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes); 
 
 //API Routes -- convert all of API routes into a "single route"
-//will change models to single models (projects -- add project category photography, illustration, etc // approvals)
-
 const apiRoutes = require("./routes/api.routes");
 app.use("/api", apiRoutes);
 
 const projectRoutes = require("./routes/project.routes");
-app.use("/photoshootProjects", projectRoutes);
-
-const approvalIllustrationRoutes = require("./routes/approval.routes");
-app.use("/illustrationApprovals", approvalIllustrationRoutes);
-
-const approvalPhotoshootRoutes = require("./routes/approval.routes");
-app.use("/photoshootApprovals", approvalPhotoshootRoutes);
+app.use("/projects", projectRoutes);
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
