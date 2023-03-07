@@ -26,8 +26,6 @@ app.use("/auth", authRoutes);
 //API Routes -- convert all of API routes into a "single route"
 //will change models to single models (projects -- add project category photography, illustration, etc // approvals)
 
-const apiRoutes = require("./routes/api.routes");
-app.use("/api", apiRoutes);
 
 const projectRoutes = require("./routes/project.routes");
 app.use("/photoshootProjects", projectRoutes);

@@ -10,16 +10,20 @@ const commentSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    // each comment can only relate to one project
+    // each comment can only relate to one project and be owned by one user
     project: {
-        typeof: Schema.Types.ObjectId,
-        ref: 'PhotoshootProject',
+        type: Schema.Types.ObjectId,
+        ref: 'Project',
+    },
+    owner: {
+        type: Schema.Types.ObjectId, //code in create project to set the owner
+        ref: 'User',
     },
 },
-{
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
-    timestamps: true
-  }
+    {
+        // this second object adds extra properties: `createdAt` and `updatedAt`    
+        timestamps: true
+    }
 )
 
 

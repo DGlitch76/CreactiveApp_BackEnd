@@ -1,4 +1,4 @@
-const PhotoshootProject = require("../models/Photoshoot.Project.model");
+const PhotoshootProject = require("../models/Project.model");
 const express = require("express");
 const router = express.Router();
 

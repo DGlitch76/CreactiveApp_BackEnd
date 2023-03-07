@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const PhotoshootProject = require("../models/Photoshoot.Project.model");
+const PhotoshootProject = require("../models/Project.model");
 const User = require("../models/User.model");
 
 router.get("/", (req, res, next) => {
