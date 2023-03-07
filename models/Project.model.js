@@ -10,9 +10,6 @@ const ProjectSchema = new Schema(
         images:[ {
             imgUrl:String,
             name: String,
-            localFolder:String,
-            isAwaitingApproval: Boolean,
-            isApproved: Boolean,
             } ],
         description: {
             type: String, 
