@@ -16,10 +16,8 @@ const projectSchema = new Schema(
             type: String,
             required: true,
         },
-        images: [{
-            imgUrl: String,
-            name: String,
-        }],
+        imgUrl: [{String}], // multiple images upload possible?
+
         description: {
             type: String,
         },
