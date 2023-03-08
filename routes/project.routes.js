@@ -31,7 +31,7 @@ router.post('/projects', async (req, res) => {
       image,
       description,
     });
-    res.redirect('/projects');
+    res.status(201).json({ message: 'Project created', project: newProject });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');
