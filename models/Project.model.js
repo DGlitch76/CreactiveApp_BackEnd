@@ -6,10 +6,7 @@ const ProjectSchema = new Schema(
             type: String,
             required: true //this value should be the file name by default or input value by creator
         },
-        images:[ {
-            imgUrl:String,
-            name: String,
-            } ],
+        images:[String],
         description: {
             type: String,
         },
