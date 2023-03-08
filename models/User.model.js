@@ -16,7 +16,6 @@ const userSchema = new Schema(
     firstname: {
       type: String,
       trim: true,
-      required: true,
       unique: false
     },
     lastname: {
@@ -27,7 +26,6 @@ const userSchema = new Schema(
     role: {
       type: Array,
       trim: true,
-      required: true
     },
     dob: {
       type: Date,
@@ -44,7 +42,7 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-     // required: true,
+      required: true,
       lowercase: false,
       trim: true
     },
@@ -76,9 +74,14 @@ const userSchema = new Schema(
         },
       }  
   },
+
+  {
+    // this second object adds extra properties: `createdAt` and `updatedAt`    
+    timestamps: true
+  }
 );
 
 
-const User = model("User", userSchema)
+const User = model("User", userSchema);
 
-module.exports = User
+module.exports = User;

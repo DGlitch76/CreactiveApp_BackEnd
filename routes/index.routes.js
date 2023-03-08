@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const PhotoshootProject = require("../models/Photoshoot.Project.model");
+const Project = require("../models/Project.model");
 const User = require("../models/User.model");
 
 router.get("/", (req, res, next) => {
@@ -7,13 +7,13 @@ router.get("/", (req, res, next) => {
 });
 
 //PROJECTS routes
-router.get("/api/projects", async (req, res, next) => {
+router.get("/projects", async (req, res, next) => {
   const allProjects = await Project.find()
   res.json(allProjects);
 });
 
 //USERS routes
-router.get("/api/users", async (req, res, next) => {
+router.get("/users", async (req, res, next) => {
   const allUsers = await User.find()
   res.json(allUsers)
 });

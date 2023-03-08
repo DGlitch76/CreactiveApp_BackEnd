@@ -1,4 +1,4 @@
-const PhotoshootProject = require("../models/Photoshoot.Project.model");
+const Project = require("../models/Project.model");
 const express = require("express");
 const router = express.Router();
 
@@ -12,10 +12,10 @@ router.get("/api", (req, res, next) => {
 });
 
 // Get all projects
-router.get('/api/projects', async (req, res) => {
+router.get('/projects', async (req, res) => {
   try {
     const projects = await Project.find();
-    res.render('/api/projects', { projects });
+    res.render('projects', { projects });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');
@@ -23,15 +23,15 @@ router.get('/api/projects', async (req, res) => {
 });
 
 // Create a new project
-router.post('/api/project/new', async (req, res) => {
+router.post('/projects', async (req, res) => {
   try {
     const { name, image, description } = req.body;
-    const newProject = await PhotoshootProject.create({
+    const newProject = await Project.create({
       name,
       image,
       description,
     });
-    res.status(201).json(newProject);
+    res.redirect('/projects');
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');
@@ -39,13 +39,13 @@ router.post('/api/project/new', async (req, res) => {
 });
 
 // Get a specific project by ID
-router.get('/api/projects/:projectId', async (req, res) => {
+router.get('/projects/:projectId', async (req, res) => {
   try {
-    const project = await PhotoshootProject.findById(req.params.photoshootProjectId).populate('User');
+    const project = await Project.findById(req.params.ProjectId).populate('User');
     if (!project) {
       res.status(404).send('Project not found');
     } else {
-      res.render(`/api/projects/${req.params.ProjectId}`);
+      res.render('projectDetail', { project });
     }
   } catch (err) {
     console.error(err);
@@ -54,18 +54,18 @@ router.get('/api/projects/:projectId', async (req, res) => {
 });
 
 // Update a specific project by ID
-router.post('/api/projects/:projectId/update', async (req, res) => {
+router.post('/projects/:projectId/update', async (req, res) => {
   try {
     const { name, image, description } = req.body;
-    const updatedProject = await PhotoshootProject.findByIdAndUpdate(
-      req.params.photoshootProjectId,
+    const updatedProject = await Project.findByIdAndUpdate(
+      req.params.ProjectId,
       { name, image, description },
       { new: true }
     );
     if (!updatedProject) {
       res.status(404).send('Project not found');
     } else {
-      res.redirect(`/api/projects/${req.params.ProjectId}`);
+      res.redirect(`/projects/${req.params.ProjectId}`);
     }
   } catch (err) {
     console.error(err);
@@ -74,13 +74,13 @@ router.post('/api/projects/:projectId/update', async (req, res) => {
 });
 
 // Delete a specific project by ID
-router.post('/api/projects/:projectId/delete', async (req, res) => {
+router.post('/projects/:projectId/delete', async (req, res) => {
   try {
-    const deletedProject = await PhotoshootProject.findByIdAndDelete(req.params.photoshootProjectId);
+    const deletedProject = await Project.findByIdAndDelete(req.params.ProjectId);
     if (!deletedProject) {
       res.status(404).send('Project not found');
     } else {
-      res.redirect('/api/projects');
+      res.redirect('/projects');
     }
   } catch (err) {
     console.error(err);

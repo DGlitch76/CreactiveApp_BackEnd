@@ -7,11 +7,14 @@ const ProjectSchema = new Schema(
             type: String,
             required: true //this value should be the file name by default or input value by creator
         },
-        image:[ {
+        images:[ {
             imgUrl:String,
             name: String,
             } ],
         description: {
+            type: String, 
+        },
+        hashtags: {
             type: String, 
         },
         hashtags: {
