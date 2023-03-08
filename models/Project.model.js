@@ -41,5 +41,7 @@ const ProjectSchema = new Schema(
     timestamps: true
   }
 )
-  const Project = model("Project", ProjectSchema);
+
+const Project = model("Project", ProjectSchema);
+
 module.exports = Project;

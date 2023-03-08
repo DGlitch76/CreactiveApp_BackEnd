@@ -1,6 +1,7 @@
 const Project = require("../models/Project.model");
 const express = require("express");
 const router = express.Router();
+
 router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
@@ -81,4 +82,5 @@ router.post('/:projectId/delete', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
 module.exports = router;

@@ -48,4 +48,5 @@ router.post('/verify', isAuthenticated, (req, res) => {
     res.json(req.payload.data.user)
   }
 })
+
 module.exports = router
