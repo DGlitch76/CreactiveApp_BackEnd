@@ -35,7 +35,7 @@ router.post('/new', uploader.single("imageUrl"), async (req, res, next) => {
       name: req.body.name,
       images: [req.file.path],
       description: req.body.description,
-      // owner:req.session.user, DECODE TOKEN - GET USER ID --- SEND TO PROJECT OWNER
+      // owner:req.session.user, DECODE TOKEN - GET USER ID --- SEND TO PROJECT
     });
     console.log(newProject);
     res.status(201).json({ message: 'Project created', project: newProject });
@@ -47,11 +47,11 @@ router.post('/new', uploader.single("imageUrl"), async (req, res, next) => {
 // Get a specific project by ID
 router.get('/:projectId', async (req, res) => {
   try {
-    const project = await Project.findById(req.params.ProjectId).populate('User');
+    const project = await Project.findById(req.params.projectId);
     if (!project) {
       res.status(404).send('Project not found');
     } else {
-      res.render('projectDetail', { project });
+      res.send(201).json({ message: 'Project found', project: project._id })
     }
   } catch (err) {
     console.error(err);
@@ -70,7 +70,7 @@ router.post('/:projectId/update', async (req, res) => {
     if (!updatedProject) {
       res.status(404).send('Project not found');
     } else {
-      res.redirect(`/projects/${req.params.ProjectId}`);
+      res.redirect(`/projects/${req.params.projectId}`);
     }
   } catch (err) {
     console.error(err);
@@ -80,7 +80,7 @@ router.post('/:projectId/update', async (req, res) => {
 // Delete a specific project by ID
 router.post('/:projectId/delete', async (req, res) => {
   try {
-    const deletedProject = await Project.findByIdAndDelete(req.params.ProjectId);
+    const deletedProject = await Project.findByIdAndDelete(req.params.projectId);
     if (!deletedProject) {
       res.status(404).send('Project not found');
     } else {
