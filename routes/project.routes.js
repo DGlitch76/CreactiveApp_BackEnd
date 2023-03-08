@@ -1,4 +1,5 @@
 const Project = require("../models/Project.model");
+const uploader = require('../middleware/cloudinary.config');
 const express = require("express");
 const router = express.Router();
 
@@ -20,13 +21,21 @@ router.get('/', async (req, res) => {
   }
 });
 // Create a new project
-router.post('/new', async (req, res) => {
+router.post('/new', uploader.single("imageUrl"), async (req, res, next) => {
+  if (!req.file) {
+    res.status(200).json({ message: "no image" });
+  } else {    
+    //get the image url in 'req.file.path'   
+    // res.status(200).json({images: req.file.path});
+    console.log(req.file.path);
   try {
-    const { name, image, description } = req.body;
+    const { name, description } = req.body;
+     
     const newProject = await Project.create({
       name: req.body.name,
-      image: req.body.images,
+      images: [req.file.path],
       description: req.body.description,
+      // owner:req.session.user, DECODE TOKEN - GET USER ID --- SEND TO PROJECT
     });
     console.log(newProject);
     res.status(201).json({ message: 'Project created', project: newProject });
@@ -34,15 +43,15 @@ router.post('/new', async (req, res) => {
     console.error(err);
     res.status(500).send('Server error');
   }
-});
+}});
 // Get a specific project by ID
 router.get('/:projectId', async (req, res) => {
   try {
-    const project = await Project.findById(req.params.ProjectId).populate('User');
+    const project = await Project.findById(req.params.projectId);
     if (!project) {
       res.status(404).send('Project not found');
     } else {
-      res.render('projectDetail', { project });
+      res.send(201).json({ message: 'Project found', project: project._id })
     }
   } catch (err) {
     console.error(err);
@@ -61,7 +70,7 @@ router.post('/:projectId/update', async (req, res) => {
     if (!updatedProject) {
       res.status(404).send('Project not found');
     } else {
-      res.redirect(`/projects/${req.params.ProjectId}`);
+      res.redirect(`/projects/${req.params.projectId}`);
     }
   } catch (err) {
     console.error(err);
@@ -71,7 +80,7 @@ router.post('/:projectId/update', async (req, res) => {
 // Delete a specific project by ID
 router.post('/:projectId/delete', async (req, res) => {
   try {
-    const deletedProject = await Project.findByIdAndDelete(req.params.ProjectId);
+    const deletedProject = await Project.findByIdAndDelete(req.params.projectId);
     if (!deletedProject) {
       res.status(404).send('Project not found');
     } else {
