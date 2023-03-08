@@ -1,21 +1,10 @@
 const { Schema, model } = require("mongoose");
-
-const userOptions = [
-  'Admin', // not to be included within the signup form
-  'Client',
-  'Creator',
-  'Illustrator',
-  'Graphic Designer',
-  'Web Designer',
-  'Product Designer',
-  'UI/UX Designer',
-  'Web Developer'
-]
-
+// User model with access control (check bellow)
 const userSchema = new Schema(
   {
     avatar: {
       type: String,
+      required: false
     },
     username: {
       type: String,
@@ -31,27 +20,28 @@ const userSchema = new Schema(
     lastname: {
       type: String,
       trim: true,
+      required: false
     },
-    //needs review (also same thing in Project.model) -- multiple selection in form possible // maybe backlog feature
     role: {
-      type: [String],
-      user: [userOptions],
-      required: false, //to be set true later
+      type: Array,
+      trim: true,
     },
     dob: {
       type: Date,
+      required: false,
     },
     company: {
       type: String,
       trim: true,
+      required: false
     },
     phone: {
       type: Number,
+      required: false
     },
     email: {
       type: String,
       required: true,
-      unique: true,
       lowercase: false,
       trim: true
     },
@@ -60,32 +50,33 @@ const userSchema = new Schema(
       required: true
     },
     address:
-    {
-      street: {
-        type: String,
-      },
-      city: {
-        type: String,
-      },
-      state: {
-        type: String,
-      },
-      zip: {
-        type: Number,
-      },
-      country: {
-        type: String,
-        required: false, //to be set true later
-      },
-    }
+      {
+        street: {
+          type: String,
+          required: false
+        },
+        city: {
+          type: String,
+          required: false
+        },
+        state: {
+          type: String,
+          required: false
+        },
+        zip: {
+          type: Number,
+          required: false
+        },
+        country: {
+          type: String,
+          required: false
+        },
+      }
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
+    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true
   }
 );
-
-
 const User = model("User", userSchema);
-
 module.exports = User;

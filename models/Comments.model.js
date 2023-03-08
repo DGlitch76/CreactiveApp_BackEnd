@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-
 const commentSchema = new Schema({
     text: {
         type: String,
@@ -10,7 +9,7 @@ const commentSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    // each comment can only relate to one project and be owned by one user
+    // each comment can only relate to one project
     project: {
         type: Schema.Types.ObjectId,
         ref: 'Project',
@@ -20,13 +19,10 @@ const commentSchema = new Schema({
         ref: 'User',
     },
 },
-    {
-        // this second object adds extra properties: `createdAt` and `updatedAt`    
-        timestamps: true
-    }
+{
+    // this second object adds extra properties: `createdAt` and `updatedAt`
+    timestamps: true
+  }
 )
-
-
 const Comment = model("Comment", commentSchema);
-
 module.exports = Comment;

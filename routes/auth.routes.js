@@ -7,7 +7,6 @@ const User = require('../models/User.model')
 router.get('/', (req, res, next) => {
   res.json('All good in auth')
 })
-
 // Signup
 router.post('/signup', async (req, res) => {
   console.log(req.body)
@@ -16,11 +15,9 @@ router.post('/signup', async (req, res) => {
   const hashedPassword = bcrypt.hashSync(req.body.password, salt)
   // Create the User
   console.log({username: req.body.username, passwordHash: hashedPassword})
-  await User.create({ username: req.body.username, passwordHash: hashedPassword })
-
+  await User.create({ username: req.body.username, passwordHash: hashedPassword, email: req.body.email })
   res.status(201).json({ message: 'User created' })
 })
-
 // Login
 router.post('/login', async (req, res) => {
   // Check for the username
@@ -45,12 +42,10 @@ router.post('/login', async (req, res) => {
     res.status(404).json({ message: 'User not found' })
   }
 })
-
 // Verify
 router.post('/verify', isAuthenticated, (req, res) => {
   if (req.payload) {
     res.json(req.payload.data.user)
   }
 })
-
 module.exports = router
