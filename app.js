@@ -20,6 +20,8 @@ const apiRoutes = require("./routes/api.routes");
 app.use("/api", apiRoutes);
 const projectRoutes = require("./routes/project.routes");
 app.use("/projects", projectRoutes);
+/*const commentRoutes = require("./routes/comment.routes");
+app.use("/comments", commentRoutes);*/
 // :exclamação: To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
