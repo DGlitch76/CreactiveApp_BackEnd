@@ -15,6 +15,10 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Project',
     },
+    owner: {
+        type: Schema.Types.ObjectId, //code in create project to set the owner
+        ref: 'User',
+    },
 },
 {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
