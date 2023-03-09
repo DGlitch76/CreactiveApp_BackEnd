@@ -2,7 +2,6 @@ const Project = require("../models/Project.model");
 const uploader = require('../middleware/cloudinary.config');
 const express = require("express");
 const router = express.Router();
-
 router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
@@ -30,7 +29,6 @@ router.post('/new', uploader.single("imageUrl"), async (req, res, next) => {
   } else {
     try {
       const { name, description } = req.body;
-       
       const newProject = await Project.create({
         name: req.body.name,
         images: [req.file.path],
@@ -45,7 +43,6 @@ router.post('/new', uploader.single("imageUrl"), async (req, res, next) => {
     }
   }
 });
-
 // Get a specific project by ID
 router.get('/:projectId', async (req, res) => {
   try {
@@ -76,14 +73,15 @@ router.get('/updated/:projectId', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-
-router.post('/:projectId/update', async (req, res) => {
+router.put('/:projectId/update', async (req, res) => {
   try {
     const { name, image, description } = req.body;
+    console.log("Update data sent",req.body)
     const updatedProject = await Project.findByIdAndUpdate(
       req.params.projectId,
       { name, image, description },
       { new: true }
+     
     );
     if (!updatedProject) {
       res.status(404).send('Project not found');
