@@ -72,10 +72,12 @@ router.get('/updated/:projectId', async (req, res) => {
 router.put('/:projectId/update', async (req, res) => {
   try {
     const { name, image, description } = req.body;
+    console.log("Update data sent",req.body)
     const updatedProject = await Project.findByIdAndUpdate(
       req.params.projectId,
       { name, image, description },
       { new: true }
+     
     );
     if (!updatedProject) {
       res.status(404).send('Project not found');
