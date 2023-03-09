@@ -53,7 +53,7 @@ router.get('/:projectId', async (req, res) => {
     if (!project) {
       res.status(404).send('Project not found');
     } else {
-      res.send(201).json({ message: 'Project found', project });
+      res.status(201).json({ message: 'Project found', project });
     }
   } catch (err) {
     console.error(err);
@@ -62,6 +62,21 @@ router.get('/:projectId', async (req, res) => {
 });
 
 // Update a specific project by ID
+router.get('/updated/:projectId', async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.projectId);
+    if (!project) {
+      res.status(404).send('Project not found');
+    } else {
+      console.log(project)
+      res.status(201).json({ message: 'Project found', project });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
 router.post('/:projectId/update', async (req, res) => {
   try {
     const { name, image, description } = req.body;
@@ -73,7 +88,7 @@ router.post('/:projectId/update', async (req, res) => {
     if (!updatedProject) {
       res.status(404).send('Project not found');
     } else {
-      res.send(201).json({ message: 'Project updated', project: updatedProject });
+      res.status(201).json({ message: 'Project updated', project: updatedProject });
     }
   } catch (err) {
     console.error(err);
@@ -88,7 +103,7 @@ router.delete('/:projectId', async (req, res) => {
     if (!deletedProject) {
       res.status(404).send('Project not found');
     } else {
-      res.send(200).json({ message: 'Project deleted', project: deletedProject });
+      res.status(200).json({ message: 'Project deleted', project: deletedProject });
     }
   } catch (err) {
     console.error(err);
