@@ -69,7 +69,9 @@ router.get('/updated/:projectId', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-router.put('/:projectId/update', async (req, res) => {
+
+// UPDATE ROUTE
+router.put('/:projectId/update',uploader.single("imageUrl"), async (req, res) => {
   try {
     const { name, image, description } = req.body;
     console.log("Update data sent",req.body)
